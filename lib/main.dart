@@ -1,4 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:server_driven_ui_demo/models/add_to_do_screen_config.dart';
+import 'package:server_driven_ui_demo/screens/add_to_do_screen.dart';
+
+import 'models/models.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,34 +31,31 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
- 
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'Hello world',
-              style: Theme.of(context).textTheme.display1,
-            ),
-          ],
+        floatingActionButton: FloatingActionButton(
+          onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => AddToDoScreen(
+                    toDoScreenConfig:
+                        AddToDoScreenConfig.fromJson(json.decode(sampleConfig) as List),
+                  ))),
         ),
-      )
-    );
+        appBar: AppBar(
+          // Here we take the value from the MyHomePage object that was created by
+          // the App.build method, and use it to set our appbar title.
+          title: Text(widget.title),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Hello world',
+                style: Theme.of(context).textTheme.display1,
+              ),
+            ],
+          ),
+        ));
   }
 }
